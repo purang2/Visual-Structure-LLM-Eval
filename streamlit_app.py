@@ -216,7 +216,7 @@ def main():
     num_pairs = st.sidebar.selectbox(
         "평가할 쌍의 개수를 선택하세요:",
         options=[1, 2, 3, 4, 5,6,7,8,9,10],
-        index=2  # 기본값 3
+        index=0  # 기본값 1
     )
     
     # 루브릭 표시
@@ -383,3 +383,4 @@ def main():
 if __name__ == "__main__":
 
     main()
+
