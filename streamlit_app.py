@@ -127,7 +127,7 @@ Explicit Form은 텍스트의 눈으로 보이는 시각적 형태를 의미합�
                 messages=[
                     {
                         "role": "system", 
-                        "content": """당신은 느린학습자용 텍스트 번안 품질 평가 전문가입니다. 
+                        "content": """당신은 느린학습자를 위한 쉬운글 텍스트 번안 품질 평가 전문가입니다. 
 
 주요 역할:
 - 원문과 번안문의 구조적 형태(Explicit Form) 보존도를 정확히 측정
@@ -215,7 +215,7 @@ def main():
     st.sidebar.header("설정")
     num_pairs = st.sidebar.selectbox(
         "평가할 쌍의 개수를 선택하세요:",
-        options=[1, 2, 3, 4, 5],
+        options=[1, 2, 3, 4, 5,6,7,8,9,10],
         index=2  # 기본값 3
     )
     
@@ -381,4 +381,5 @@ def main():
        
 
 if __name__ == "__main__":
+
     main()
