@@ -378,9 +378,44 @@ def main():
                 
                 st.divider()
         
+        # 결과 다운로드
+        if st.button("결과 다운로드 (CSV)"):
+            # DataFrame 생성
+            if eval_mode == "개별 쌍 평가":
+                df_results = pd.DataFrame([
+                    {
+                        '쌍 번호': r['pair_number'],
+                        'EXP FORM 점수': r['score'],
+                        '이유': r['reasoning'],
+                        '원문': r['original'],
+                        '번안문': r['translated']
+                    }
+                    for r in st.session_state.results
+                ])
+            else:  # 동일 원문 평가
+                df_results = pd.DataFrame([
+                    {
+                        '번안문 번호': r['translation_number'],
+                        'EXP FORM 점수': r['score'],
+                        '이유': r['reasoning'],
+                        '원문': r['original'],
+                        '번안문': r['translated']
+                    }
+                    for r in st.session_state.results
+                ])
+            
+            # CSV 다운로드
+            csv = df_results.to_csv(index=False, encoding='utf-8-sig')
+            st.download_button(
+                label="CSV 파일 다운로드",
+                data=csv,
+                file_name="explicit_form_results.csv",
+                mime="text/csv"
+            )
        
 
 if __name__ == "__main__":
 
     main()
+
 
