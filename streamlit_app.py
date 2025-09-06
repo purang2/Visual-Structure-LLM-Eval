@@ -209,16 +209,33 @@ def main():
     )
     
     st.title("📝 Explicit Form Evaluator")
-    st.markdown("**번안문의 시각적 형태 보존도 평가**")
+    st.markdown("**느린학습자용 번안문의 시각적 형태 보존도 평가 도구**")
     
-    # 사이드바에 평가 개수 선택
+    # 사이드바 설정을 맨 위로 이동
     st.sidebar.header("설정")
-    num_pairs = st.sidebar.selectbox(
-        "평가할 쌍의 개수를 선택하세요:",
-        options=[1, 2, 3, 4, 5,6,7,8,9,10],
-        index=0  # 기본값 1
+    
+    # 평가 모드 선택
+    eval_mode = st.sidebar.radio(
+        "평가 모드:",
+        ["개별 쌍 평가", "동일 원문 평가"],
+        key="eval_mode_radio"  # 키 추가
     )
     
+    # 나머지 설정들도 여기서 처리
+    if eval_mode == "개별 쌍 평가":
+        num_pairs = st.sidebar.selectbox(
+            "평가할 쌍의 개수를 선택하세요:",
+            options=[1, 2, 3, 4, 5],
+            index=2
+        )
+        num_translations = None
+    else:
+        num_translations = st.sidebar.selectbox(
+            "번안문 개수를 선택하세요:",
+            options=[2, 3, 4, 5], 
+            index=1
+        )
+        num_pairs = None
     # 루브릭 표시
     with st.expander("📋 평가 기준 (루브릭)"):
         evaluator = ExplicitFormEvaluator()
@@ -417,5 +434,6 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
